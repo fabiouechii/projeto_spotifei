@@ -4,10 +4,8 @@
 
 package com.mycompany.projeto_spotifei;
 
-import view.CadastroFrame;
 import view.LoginFrame;
-import view.MenuFrame;
-import view.PesquisarFrame;
+
 
 /**
  *
@@ -16,7 +14,7 @@ import view.PesquisarFrame;
 public class Projeto_spotifei {
 
     public static void main(String[] args) {
-        PesquisarFrame janela = new PesquisarFrame();
+        LoginFrame janela = new LoginFrame();
         janela.setVisible(true);
     }
 }

@@ -4,6 +4,11 @@
  */
 package view;
 
+import controller.ControllerLogin;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Fabio
@@ -15,8 +20,66 @@ public class LoginFrame extends javax.swing.JFrame {
      */
     public LoginFrame() {
         initComponents();
+        c = new ControllerLogin(this);
     }
 
+    public JButton getBt_cadastroLogin() {
+        return bt_cadastroLogin;
+    }
+
+    public void setBt_cadastroLogin(JButton bt_cadastroLogin) {
+        this.bt_cadastroLogin = bt_cadastroLogin;
+    }
+
+    public JButton getBt_loginLogin() {
+        return bt_loginLogin;
+    }
+
+    public void setBt_loginLogin(JButton bt_loginLogin) {
+        this.bt_loginLogin = bt_loginLogin;
+    }
+
+    public JLabel getLbl_senhaLogin() {
+        return lbl_senhaLogin;
+    }
+
+    public void setLbl_senhaLogin(JLabel lbl_senhaLogin) {
+        this.lbl_senhaLogin = lbl_senhaLogin;
+    }
+
+    public JLabel getLbl_spotifeiLogin() {
+        return lbl_spotifeiLogin;
+    }
+
+    public void setLbl_spotifeiLogin(JLabel lbl_spotifeiLogin) {
+        this.lbl_spotifeiLogin = lbl_spotifeiLogin;
+    }
+
+    public JLabel getLbl_usuarioLogin() {
+        return lbl_usuarioLogin;
+    }
+
+    public void setLbl_usuarioLogin(JLabel lbl_usuarioLogin) {
+        this.lbl_usuarioLogin = lbl_usuarioLogin;
+    }
+
+    public JTextField getTxt_senhaLogin() {
+        return txt_senhaLogin;
+    }
+
+    public void setTxt_senhaLogin(JTextField txt_senhaLogin) {
+        this.txt_senhaLogin = txt_senhaLogin;
+    }
+
+    public JTextField getTxt_usuarioLogin() {
+        return txt_usuarioLogin;
+    }
+
+    public void setTxt_usuarioLogin(JTextField txt_usuarioLogin) {
+        this.txt_usuarioLogin = txt_usuarioLogin;
+    }
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -111,52 +174,57 @@ public class LoginFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bt_cadastroLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cadastroLoginActionPerformed
-        // TODO add your handling code here:
+        CadastroFrame cf = new CadastroFrame();
+        cf.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_bt_cadastroLoginActionPerformed
 
     private void bt_loginLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_loginLoginActionPerformed
         // TODO add your handling code here:
+        c.loginUsuario();
     }//GEN-LAST:event_bt_loginLoginActionPerformed
 
     private void txt_senhaLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_senhaLoginActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txt_senhaLoginActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+//    public static void main(String args[]) {;;
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new LoginFrame().setVisible(true);
+//            }
+//        });
+//    }
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoginFrame().setVisible(true);
-            }
-        });
-    }
-
+    private ControllerLogin c;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_cadastroLogin;
     private javax.swing.JButton bt_loginLogin;

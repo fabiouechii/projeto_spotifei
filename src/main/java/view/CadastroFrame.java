@@ -72,6 +72,11 @@ public class CadastroFrame extends javax.swing.JFrame {
         });
 
         bt_voltarCadastro.setText("<-- Voltar");
+        bt_voltarCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_voltarCadastroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,6 +142,12 @@ public class CadastroFrame extends javax.swing.JFrame {
     private void txt_senhaCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_senhaCadastroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_senhaCadastroActionPerformed
+
+    private void bt_voltarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_voltarCadastroActionPerformed
+        LoginFrame cf = new LoginFrame();
+        cf.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_bt_voltarCadastroActionPerformed
 
     /**
      * @param args the command line arguments

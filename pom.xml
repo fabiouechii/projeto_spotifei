@@ -10,4 +10,13 @@
         <maven.compiler.release>24</maven.compiler.release>
         <exec.mainClass>com.mycompany.projeto_spotifei.Projeto_spotifei</exec.mainClass>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.3</version>
+        </dependency>
+    </dependencies>
+    
 </project>
