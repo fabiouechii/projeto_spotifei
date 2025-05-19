@@ -48,4 +48,72 @@ public class MusicaDAO {
         }
         return musicasEncontradas;
     }
+     
+    public void curtirMusica(int idUsuario, int idMusica) throws SQLException {
+        removerDescurtida(idUsuario, idMusica);
+
+        String sql = "INSERT INTO curtidas (id_usuario, id_musica) VALUES (?, ?) ON CONFLICT (id_usuario, id_musica) DO NOTHING";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idUsuario);
+            stmt.setInt(2, idMusica);
+            stmt.executeUpdate();
+        }
+    }
+     
+    public void removerCurtida(int idUsuario, int idMusica) throws SQLException {
+        String sql = "DELETE FROM curtidas WHERE id_usuario = ? AND id_musica = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idUsuario);
+            stmt.setInt(2, idMusica);
+            stmt.executeUpdate();
+        }
+    }
+    
+    public void descurtirMusica(int idUsuario, int idMusica) throws SQLException {
+        removerCurtida(idUsuario, idMusica);
+
+        String sql = "INSERT INTO descurtidas (id_usuario, id_musica) VALUES (?, ?) ON CONFLICT (id_usuario, id_musica) DO NOTHING";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idUsuario);
+            stmt.setInt(2, idMusica);
+            stmt.executeUpdate();
+        }
+    }
+    
+    public void removerDescurtida(int idUsuario, int idMusica) throws SQLException {
+        String sql = "DELETE FROM descurtidas WHERE id_usuario = ? AND id_musica = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idUsuario);
+            stmt.setInt(2, idMusica);
+            stmt.executeUpdate();
+        }
+    }
+    
+    public boolean isMusicaCurtida(int idUsuario, int idMusica) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM curtidas WHERE id_usuario = ? AND id_musica = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idUsuario);
+            stmt.setInt(2, idMusica);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        }
+        return false;
+    }
+    
+    public boolean isMusicaDescurtida(int idUsuario, int idMusica) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM descurtidas WHERE id_usuario = ? AND id_musica = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idUsuario);
+            stmt.setInt(2, idMusica);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        }
+        return false;
+    }
 }

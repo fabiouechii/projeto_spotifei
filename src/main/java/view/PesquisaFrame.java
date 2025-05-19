@@ -27,6 +27,21 @@ public class PesquisaFrame extends javax.swing.JFrame {
      */
     public PesquisaFrame(Usuario usuario) {
         initComponents();
+        
+        bt_curtirPesquisa.setEnabled(false);
+        bt_descurtirPesquisa.setEnabled(false);
+        
+        table_resultadoPesquisa.getSelectionModel().addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent event) {
+                if (!event.getValueIsAdjusting()) {
+                    boolean linhaSelecionada = table_resultadoPesquisa.getSelectedRow() != -1;
+                    bt_curtirPesquisa.setEnabled(linhaSelecionada);
+                    bt_descurtirPesquisa.setEnabled(linhaSelecionada);
+                }
+            }
+        });
+        
+        
         this.usuarioLogado = usuario;
         this.controller = new ControllerPesquisa(this, this.usuarioLogado);
     }
@@ -93,7 +108,26 @@ public class PesquisaFrame extends javax.swing.JFrame {
     DefaultTableModel model = (DefaultTableModel) table_resultadoPesquisa.getModel();
     model.setRowCount(0);
 }
-        
+     
+    public int getIdMusicaSelecionada() {
+        int linhaSelecionada = table_resultadoPesquisa.getSelectedRow();
+        if (linhaSelecionada != -1) {
+            Object idObj = table_resultadoPesquisa.getValueAt(linhaSelecionada, 0);
+            if (idObj instanceof Integer) {
+                return (Integer) idObj;
+            } else {
+                try {
+                    return Integer.parseInt(idObj.toString());
+                } catch (NumberFormatException e) {
+                    System.err.println("Erro ao converter ID da música para Inteiro: " + idObj);
+                    return -1;
+                }
+            }
+        }
+        return -1;
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -109,6 +143,8 @@ public class PesquisaFrame extends javax.swing.JFrame {
         bt_pesquisarPesquisa = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_resultadoPesquisa = new javax.swing.JTable();
+        bt_curtirPesquisa = new javax.swing.JButton();
+        bt_descurtirPesquisa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -155,6 +191,22 @@ public class PesquisaFrame extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(table_resultadoPesquisa);
 
+        bt_curtirPesquisa.setBackground(new java.awt.Color(30, 215, 96));
+        bt_curtirPesquisa.setText("👍");
+        bt_curtirPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_curtirPesquisaActionPerformed(evt);
+            }
+        });
+
+        bt_descurtirPesquisa.setBackground(new java.awt.Color(215, 30, 96));
+        bt_descurtirPesquisa.setText("👎");
+        bt_descurtirPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_descurtirPesquisaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -172,7 +224,11 @@ public class PesquisaFrame extends javax.swing.JFrame {
                             .addComponent(txt_termoPesquisa)
                             .addComponent(lbl_spotifeiPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
                             .addComponent(bt_pesquisarPesquisa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(356, 356, 356))))
+                        .addGap(179, 179, 179)
+                        .addComponent(bt_curtirPesquisa)
+                        .addGap(47, 47, 47)
+                        .addComponent(bt_descurtirPesquisa)
+                        .addGap(84, 84, 84))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,7 +240,10 @@ public class PesquisaFrame extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(txt_termoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bt_pesquisarPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_pesquisarPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bt_curtirPesquisa)
+                    .addComponent(bt_descurtirPesquisa))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                 .addContainerGap())
@@ -213,6 +272,18 @@ public class PesquisaFrame extends javax.swing.JFrame {
     private void txt_termoPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_termoPesquisaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_termoPesquisaActionPerformed
+
+    private void bt_curtirPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_curtirPesquisaActionPerformed
+        if (controller != null) {
+            controller.processarCurtidaMusica();
+        }
+    }//GEN-LAST:event_bt_curtirPesquisaActionPerformed
+
+    private void bt_descurtirPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_descurtirPesquisaActionPerformed
+        if (controller != null) {
+            controller.processarDescurtidaMusica();
+        }
+    }//GEN-LAST:event_bt_descurtirPesquisaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -250,6 +321,8 @@ public class PesquisaFrame extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_curtirPesquisa;
+    private javax.swing.JButton bt_descurtirPesquisa;
     private javax.swing.JButton bt_pesquisarPesquisa;
     private javax.swing.JButton bt_voltarPesquisa;
     private javax.swing.JScrollPane jScrollPane1;
