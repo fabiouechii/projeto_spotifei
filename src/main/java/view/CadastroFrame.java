@@ -4,6 +4,11 @@
  */
 package view;
 
+import controller.ControllerCadastro;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Fabio
@@ -15,8 +20,82 @@ public class CadastroFrame extends javax.swing.JFrame {
      */
     public CadastroFrame() {
         initComponents();
+        c = new ControllerCadastro(this);
     }
 
+    public JButton getBt_cadastroCadastro() {
+        return bt_cadastroCadastro;
+    }
+
+    public void setBt_cadastroCadastro(JButton bt_cadastroCadastro) {
+        this.bt_cadastroCadastro = bt_cadastroCadastro;
+    }
+
+    public JButton getBt_voltarCadastro() {
+        return bt_voltarCadastro;
+    }
+
+    public void setBt_voltarCadastro(JButton bt_voltarCadastro) {
+        this.bt_voltarCadastro = bt_voltarCadastro;
+    }
+
+    public JLabel getLbl_nomeCadastro() {
+        return lbl_nomeCadastro;
+    }
+
+    public void setLbl_nomeCadastro(JLabel lbl_nomeCadastro) {
+        this.lbl_nomeCadastro = lbl_nomeCadastro;
+    }
+
+    public JLabel getLbl_senhaCadastro() {
+        return lbl_senhaCadastro;
+    }
+
+    public void setLbl_senhaCadastro(JLabel lbl_senhaCadastro) {
+        this.lbl_senhaCadastro = lbl_senhaCadastro;
+    }
+
+    public JLabel getLbl_spotifeiCadastro() {
+        return lbl_spotifeiCadastro;
+    }
+
+    public void setLbl_spotifeiCadastro(JLabel lbl_spotifeiCadastro) {
+        this.lbl_spotifeiCadastro = lbl_spotifeiCadastro;
+    }
+
+    public JLabel getLbl_usuarioCadastro() {
+        return lbl_usuarioCadastro;
+    }
+
+    public void setLbl_usuarioCadastro(JLabel lbl_usuarioCadastro) {
+        this.lbl_usuarioCadastro = lbl_usuarioCadastro;
+    }
+
+    public JTextField getTxt_nomeCadastro() {
+        return txt_nomeCadastro;
+    }
+
+    public void setTxt_nomeCadastro(JTextField txt_nomeCadastro) {
+        this.txt_nomeCadastro = txt_nomeCadastro;
+    }
+
+    public JTextField getTxt_senhaCadastro() {
+        return txt_senhaCadastro;
+    }
+
+    public void setTxt_senhaCadastro(JTextField txt_senhaCadastro) {
+        this.txt_senhaCadastro = txt_senhaCadastro;
+    }
+
+    public JTextField getTxt_usuarioCadastro() {
+        return txt_usuarioCadastro;
+    }
+
+    public void setTxt_usuarioCadastro(JTextField txt_usuarioCadastro) {
+        this.txt_usuarioCadastro = txt_usuarioCadastro;
+    }
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -136,7 +215,7 @@ public class CadastroFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_usuarioCadastroActionPerformed
 
     private void bt_cadastroCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cadastroCadastroActionPerformed
-        // TODO add your handling code here:
+        c.salvarUsuario();
     }//GEN-LAST:event_bt_cadastroCadastroActionPerformed
 
     private void txt_senhaCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_senhaCadastroActionPerformed
@@ -184,6 +263,8 @@ public class CadastroFrame extends javax.swing.JFrame {
         });
     }
 
+    private ControllerCadastro c;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_cadastroCadastro;
     private javax.swing.JButton bt_voltarCadastro;

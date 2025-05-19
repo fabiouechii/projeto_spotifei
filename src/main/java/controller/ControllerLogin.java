@@ -34,12 +34,18 @@ public class ControllerLogin {
             ResultSet res = dao.consultar(usuario);
             if (res.next()){
                 JOptionPane.showMessageDialog(view, "Login Efetuado com Sucesso!");
-                String nome = res.getString("nome");
-                String user = res.getString("usuario");
-                String senha = res.getString("senha");
-                Usuario usuario2 = new Usuario(nome, user, senha);
-                MenuFrame aec = new MenuFrame();//////////////////////////////////////////////////////MenuFrame(usuario2)
-                aec.setVisible(true);
+                
+                int idUsuario = res.getInt("id_usuario");
+                String nomeUsuarioDB = res.getString("nome_usuario");
+                String loginUsuarioDB = res.getString("login_usuario");
+                
+                Usuario usuarioLogado = new Usuario();
+                usuarioLogado.setIdUsuario(idUsuario);
+                usuarioLogado.setNomeUsuario(nomeUsuarioDB);
+                usuarioLogado.setLoginUsuario(loginUsuarioDB);
+                
+                MenuFrame menu = new MenuFrame(usuarioLogado);
+                menu.setVisible(true);
                 view.setVisible(false);
             } else{
                 JOptionPane.showMessageDialog(view, "Login não Efetuado!");

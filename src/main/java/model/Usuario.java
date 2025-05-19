@@ -9,43 +9,62 @@ package model;
  * @author Fabio
  */
 public class Usuario {
-    private String nome, usuario, senha;
+    private int idUsuario;
+    private String nomeUsuario, loginUsuario, senhaUsuario;
     
     public Usuario(){
     }
     
-    public Usuario(String nome, String usuario, String senha){
-        this.nome = nome;
-        this.usuario = usuario;
-        this.senha = senha;
+    public Usuario(String nomeUsuario, String loginUsuario, String senhaUsuario){
+        this.nomeUsuario = nomeUsuario;
+        this.loginUsuario = loginUsuario;
+        this.senhaUsuario = senhaUsuario;
     }
     
-    public String getNome(){
-        return nome;
+    public Usuario(int idUsuario, String nomeUsuario, String loginUsuario) {
+        this.idUsuario = idUsuario;
+        this.nomeUsuario = nomeUsuario;
+        this.loginUsuario = loginUsuario;
     }
     
-    public void setNome(String nome){
-        this.nome = nome;
+    public int getIdUsuario() {
+        return idUsuario;
     }
-    
-    public String getUsuario(){
-        return usuario;
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
-    
-    public void setUsuario(String usuario){
-        this.usuario = usuario;
+
+    public String getNomeUsuario() {
+        return nomeUsuario;
     }
-    
-    public String getSenha(){
-        return senha;
+
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
     }
-    
-    public void setSenha(String senha){
-        this.senha = senha;
+
+    public String getLoginUsuario() {
+        return loginUsuario;
+    }
+
+    public void setLoginUsuario(String loginUsuario) {
+        this.loginUsuario = loginUsuario;
+    }
+
+    public String getSenhaUsuario() {
+        return senhaUsuario;
+    }
+
+    public void setSenhaUsuario(String senhaUsuario) {
+        this.senhaUsuario = senhaUsuario;
     }
     
     @Override
-    public String toString(){
-        return "Aluno{" + "nome=" + nome + ", usuario=" + usuario + ", senha=" + senha + '}';     
+    public String toString() {
+        return "Usuario{" +
+               "idUsuario=" + idUsuario +
+               ", nomeUsuario='" + nomeUsuario + '\'' +
+               ", loginUsuario='" + loginUsuario + '\'' +
+               '}';
     }
 }

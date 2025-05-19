@@ -21,22 +21,22 @@ public class UsuarioDAO {
     }
     
     public ResultSet consultar(Usuario usuario) throws SQLException{
-        String sql = "select * from usuarios where usuario = ? and senha = ?";
+        String sql = "select * from usuarios where login_usuario = ? and senha_usuario = ?";
         PreparedStatement statement = conn.prepareStatement(sql);
-        statement.setString(1, usuario.getUsuario());
-        statement.setString(2, usuario.getSenha());
+        statement.setString(1, usuario.getLoginUsuario());
+        statement.setString(2, usuario.getSenhaUsuario());
         statement.execute();
         ResultSet resultado = statement.getResultSet();
         return resultado;
     }
     
     public void inserir(Usuario usuario) throws SQLException{
-        String sql = "insert into usuarios(nome, usuario, senha) values ('"
-                + usuario.getNome() + "' , '"
-                + usuario.getUsuario() + "' , '"
-                + usuario.getSenha() + "' , '";
+        String sql = "insert into usuarios(nome_usuario, login_usuario, senha_usuario) values ('"
+                + usuario.getNomeUsuario() + "' , '"
+                + usuario.getLoginUsuario() + "' , '"
+                + usuario.getSenhaUsuario() + "')";
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.execute();
-        conn.close();
+        //conn.close();
     }
 }

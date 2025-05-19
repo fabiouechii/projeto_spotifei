@@ -4,12 +4,19 @@
  */
 package view;
 
+import model.Usuario;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Fabio
  */
 public class MenuFrame extends javax.swing.JFrame {
 
+     private Usuario usuarioLogado;
+    
     /**
      * Creates new form MenuFrame
      */
@@ -17,6 +24,14 @@ public class MenuFrame extends javax.swing.JFrame {
         initComponents();
     }
 
+    
+    public MenuFrame(Usuario usuario) {
+        initComponents();
+        this.usuarioLogado = usuario;
+        System.out.println("Usuario logado: " + usuarioLogado.getNomeUsuario());
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,6 +58,11 @@ public class MenuFrame extends javax.swing.JFrame {
         lbl_spotifeiMenu.setToolTipText("");
 
         bt_voltarMenu.setText("<-- Desconectar");
+        bt_voltarMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_voltarMenuActionPerformed(evt);
+            }
+        });
 
         bt_playlistsMenu.setBackground(new java.awt.Color(25, 20, 20));
         bt_playlistsMenu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -53,6 +73,11 @@ public class MenuFrame extends javax.swing.JFrame {
         bt_pesquisarMenu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         bt_pesquisarMenu.setForeground(new java.awt.Color(30, 215, 96));
         bt_pesquisarMenu.setText("Pesquisar");
+        bt_pesquisarMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_pesquisarMenuActionPerformed(evt);
+            }
+        });
 
         bt_historicoMenu.setBackground(new java.awt.Color(25, 20, 20));
         bt_historicoMenu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -92,6 +117,25 @@ public class MenuFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bt_pesquisarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_pesquisarMenuActionPerformed
+        if (this.usuarioLogado != null) {
+        PesquisaFrame pesquisarView = new PesquisaFrame(this.usuarioLogado);
+        pesquisarView.setVisible(true);
+        this.dispose();
+    } else {
+        JOptionPane.showMessageDialog(this, "Erro: Usuário não está logado.", "Erro", JOptionPane.ERROR_MESSAGE);
+        LoginFrame loginView = new LoginFrame();
+        loginView.setVisible(true);
+        this.dispose();
+    }
+    }//GEN-LAST:event_bt_pesquisarMenuActionPerformed
+
+    private void bt_voltarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_voltarMenuActionPerformed
+        LoginFrame loginView = new LoginFrame();
+        loginView.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_bt_voltarMenuActionPerformed
 
     /**
      * @param args the command line arguments
