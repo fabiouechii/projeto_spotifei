@@ -78,6 +78,12 @@
     </Component>
     <Component class="javax.swing.JButton" name="bt_voltarMenu">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="14" green="14" red="19" type="rgb"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="60" green="d7" red="1e" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="&lt;-- Desconectar"/>
       </Properties>
       <Events>

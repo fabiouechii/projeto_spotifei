@@ -145,6 +145,9 @@ public class PesquisaFrame extends javax.swing.JFrame {
         table_resultadoPesquisa = new javax.swing.JTable();
         bt_curtirPesquisa = new javax.swing.JButton();
         bt_descurtirPesquisa = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        table_playlistsPesquisa = new javax.swing.JTable();
+        bt_addmusicaPesquisa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -155,6 +158,8 @@ public class PesquisaFrame extends javax.swing.JFrame {
         lbl_spotifeiPesquisa.setText("SPOTIFEI");
         lbl_spotifeiPesquisa.setToolTipText("");
 
+        bt_voltarPesquisa.setBackground(new java.awt.Color(25, 20, 20));
+        bt_voltarPesquisa.setForeground(new java.awt.Color(30, 215, 96));
         bt_voltarPesquisa.setText("<-- Voltar");
         bt_voltarPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -207,6 +212,24 @@ public class PesquisaFrame extends javax.swing.JFrame {
             }
         });
 
+        table_playlistsPesquisa.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(table_playlistsPesquisa);
+
+        bt_addmusicaPesquisa.setBackground(new java.awt.Color(25, 20, 20));
+        bt_addmusicaPesquisa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        bt_addmusicaPesquisa.setForeground(new java.awt.Color(30, 215, 96));
+        bt_addmusicaPesquisa.setText("Adicionar música à playlist");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -214,21 +237,27 @@ public class PesquisaFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(bt_voltarPesquisa)
-                        .addGap(241, 241, 241)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_termoPesquisa)
-                            .addComponent(lbl_spotifeiPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-                            .addComponent(bt_pesquisarPesquisa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(179, 179, 179)
-                        .addComponent(bt_curtirPesquisa)
-                        .addGap(47, 47, 47)
-                        .addComponent(bt_descurtirPesquisa)
-                        .addGap(84, 84, 84))))
+                    .addComponent(bt_voltarPesquisa)
+                    .addComponent(bt_addmusicaPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(134, 134, 134)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_termoPesquisa)
+                    .addComponent(lbl_spotifeiPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                    .addComponent(bt_pesquisarPesquisa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(179, 179, 179)
+                .addComponent(bt_curtirPesquisa)
+                .addGap(47, 47, 47)
+                .addComponent(bt_descurtirPesquisa)
+                .addGap(84, 84, 84))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(680, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,14 +268,24 @@ public class PesquisaFrame extends javax.swing.JFrame {
                     .addComponent(bt_voltarPesquisa))
                 .addGap(30, 30, 30)
                 .addComponent(txt_termoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bt_pesquisarPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_curtirPesquisa)
-                    .addComponent(bt_descurtirPesquisa))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(bt_pesquisarPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bt_curtirPesquisa)
+                            .addComponent(bt_descurtirPesquisa)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(bt_addmusicaPesquisa)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(190, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
 
         pack();
@@ -321,12 +360,15 @@ public class PesquisaFrame extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_addmusicaPesquisa;
     private javax.swing.JButton bt_curtirPesquisa;
     private javax.swing.JButton bt_descurtirPesquisa;
     private javax.swing.JButton bt_pesquisarPesquisa;
     private javax.swing.JButton bt_voltarPesquisa;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbl_spotifeiPesquisa;
+    private javax.swing.JTable table_playlistsPesquisa;
     private javax.swing.JTable table_resultadoPesquisa;
     private javax.swing.JTextField txt_termoPesquisa;
     // End of variables declaration//GEN-END:variables

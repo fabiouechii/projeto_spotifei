@@ -1,3 +1,4 @@
+view\PlaylistFrame$2.class
 controller\ControllerLogin.class
 view\MenuFrame$4.class
 view\CadastroFrame$3.class
@@ -18,12 +19,14 @@ view\PesquisaFrame$3.class
 view\PesquisaFrame$1.class
 view\LoginFrame$1.class
 DAO\Conexao.class
+DAO\HistoricoBuscaDAO.class
 model\Musica.class
 view\PesquisaFrame$6.class
 view\LoginFrame$3.class
 view\MenuFrame$5.class
 view\CadastroFrame$4.class
 view\MenuFrame.class
+view\PlaylistFrame$1.class
 view\MenuFrame$1.class
 controller\ControllerPesquisa.class
 view\CadastroFrame.class
@@ -31,6 +34,7 @@ view\PesquisaFrame.class
 view\PesquisaFrame$4.class
 com\mycompany\projeto_spotifei\Projeto_spotifei.class
 controller\ControllerHistorico.class
+view\PlaylistFrame.class
 view\CadastroFrame$2.class
 view\CadastroFrame$5.class
 view\HistoricoFrame.class

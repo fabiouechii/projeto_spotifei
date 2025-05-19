@@ -134,6 +134,9 @@ public class CadastroFrame extends javax.swing.JFrame {
             }
         });
 
+        bt_cadastroCadastro.setBackground(new java.awt.Color(25, 20, 20));
+        bt_cadastroCadastro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        bt_cadastroCadastro.setForeground(new java.awt.Color(30, 215, 96));
         bt_cadastroCadastro.setText("Cadastro");
         bt_cadastroCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,6 +153,8 @@ public class CadastroFrame extends javax.swing.JFrame {
             }
         });
 
+        bt_voltarCadastro.setBackground(new java.awt.Color(25, 20, 20));
+        bt_voltarCadastro.setForeground(new java.awt.Color(30, 215, 96));
         bt_voltarCadastro.setText("<-- Voltar");
         bt_voltarCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

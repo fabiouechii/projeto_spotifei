@@ -106,6 +106,9 @@ public class LoginFrame extends javax.swing.JFrame {
         lbl_usuarioLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_usuarioLogin.setText("Usuário:");
 
+        bt_cadastroLogin.setBackground(new java.awt.Color(25, 20, 20));
+        bt_cadastroLogin.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        bt_cadastroLogin.setForeground(new java.awt.Color(30, 215, 96));
         bt_cadastroLogin.setText("Cadastrar");
         bt_cadastroLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,6 +116,9 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
+        bt_loginLogin.setBackground(new java.awt.Color(25, 20, 20));
+        bt_loginLogin.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        bt_loginLogin.setForeground(new java.awt.Color(30, 215, 96));
         bt_loginLogin.setText("Login");
         bt_loginLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

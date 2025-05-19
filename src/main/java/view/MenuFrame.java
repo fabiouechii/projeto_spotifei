@@ -57,6 +57,8 @@ public class MenuFrame extends javax.swing.JFrame {
         lbl_spotifeiMenu.setText("SPOTIFEI");
         lbl_spotifeiMenu.setToolTipText("");
 
+        bt_voltarMenu.setBackground(new java.awt.Color(25, 20, 20));
+        bt_voltarMenu.setForeground(new java.awt.Color(30, 215, 96));
         bt_voltarMenu.setText("<-- Desconectar");
         bt_voltarMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

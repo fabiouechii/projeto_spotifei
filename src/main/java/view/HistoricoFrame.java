@@ -195,6 +195,8 @@ public class HistoricoFrame extends javax.swing.JFrame {
 
         tab_painelHistorico.addTab("Descurtidas", jPanel3);
 
+        bt_voltarHistorico.setBackground(new java.awt.Color(25, 20, 20));
+        bt_voltarHistorico.setForeground(new java.awt.Color(30, 215, 96));
         bt_voltarHistorico.setText("<-- Voltar");
         bt_voltarHistorico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
