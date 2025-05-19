@@ -68,6 +68,11 @@ public class MenuFrame extends javax.swing.JFrame {
         bt_playlistsMenu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         bt_playlistsMenu.setForeground(new java.awt.Color(30, 215, 96));
         bt_playlistsMenu.setText("Playlists");
+        bt_playlistsMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_playlistsMenuActionPerformed(evt);
+            }
+        });
 
         bt_pesquisarMenu.setBackground(new java.awt.Color(25, 20, 20));
         bt_pesquisarMenu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -83,6 +88,11 @@ public class MenuFrame extends javax.swing.JFrame {
         bt_historicoMenu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         bt_historicoMenu.setForeground(new java.awt.Color(30, 215, 96));
         bt_historicoMenu.setText("Histórico");
+        bt_historicoMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_historicoMenuActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -136,6 +146,23 @@ public class MenuFrame extends javax.swing.JFrame {
         loginView.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_bt_voltarMenuActionPerformed
+
+    private void bt_playlistsMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_playlistsMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_playlistsMenuActionPerformed
+
+    private void bt_historicoMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_historicoMenuActionPerformed
+        if (this.usuarioLogado != null) {
+        HistoricoFrame historicoView = new HistoricoFrame(this.usuarioLogado);
+        historicoView.setVisible(true);
+        this.dispose();
+    } else {
+        JOptionPane.showMessageDialog(this, "Erro: Usuário não está logado.", "Erro", JOptionPane.ERROR_MESSAGE);
+        LoginFrame loginView = new LoginFrame();
+        loginView.setVisible(true);
+        this.dispose();
+    }
+    }//GEN-LAST:event_bt_historicoMenuActionPerformed
 
     /**
      * @param args the command line arguments

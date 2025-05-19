@@ -1,4 +1,5 @@
 controller\ControllerLogin.class
+view\MenuFrame$4.class
 view\CadastroFrame$3.class
 view\PesquisaFrame$7.class
 DAO\UsuarioDAO.class
@@ -7,6 +8,8 @@ view\MenuFrame$2.class
 view\LoginFrame$2.class
 model\Usuario.class
 view\PesquisaFrame$5.class
+view\HistoricoFrame$3.class
+view\HistoricoFrame$2.class
 controller\ControllerCadastro.class
 view\PesquisaFrame$8.class
 view\CadastroFrame$1.class
@@ -18,6 +21,7 @@ DAO\Conexao.class
 model\Musica.class
 view\PesquisaFrame$6.class
 view\LoginFrame$3.class
+view\MenuFrame$5.class
 view\CadastroFrame$4.class
 view\MenuFrame.class
 view\MenuFrame$1.class
@@ -26,7 +30,10 @@ view\CadastroFrame.class
 view\PesquisaFrame.class
 view\PesquisaFrame$4.class
 com\mycompany\projeto_spotifei\Projeto_spotifei.class
+controller\ControllerHistorico.class
 view\CadastroFrame$2.class
 view\CadastroFrame$5.class
+view\HistoricoFrame.class
+view\HistoricoFrame$1.class
 view\MenuFrame$3.class
 view\LoginFrame.class

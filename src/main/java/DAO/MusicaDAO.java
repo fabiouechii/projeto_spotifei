@@ -116,4 +116,48 @@ public class MusicaDAO {
         }
         return false;
     }
+    
+    public List<Musica> listarMusicasCurtidas(int idUsuario) throws SQLException {
+        List<Musica> musicasCurtidas = new ArrayList<>();
+        String sql = "SELECT m.id_musica, m.nome_musica, m.autor_musica, m.genero_musica " +
+                    "FROM musicas m " +
+                    "JOIN curtidas c ON m.id_musica = c.id_musica " +
+                    "WHERE c.id_usuario = ?";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idUsuario);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    int id = rs.getInt("id_musica");
+                    String nome = rs.getString("nome_musica");
+                    String autor = rs.getString("autor_musica");
+                    String genero = rs.getString("genero_musica");
+                    musicasCurtidas.add(new Musica(id, nome, autor, genero));
+                }
+            }
+        }
+        return musicasCurtidas;
+    }
+    
+    public List<Musica> listarMusicasDescurtidas(int idUsuario) throws SQLException {
+        List<Musica> musicasDescurtidas = new ArrayList<>();
+        String sql = "SELECT m.id_musica, m.nome_musica, m.autor_musica, m.genero_musica " +
+                     "FROM musicas m " +
+                     "JOIN descurtidas d ON m.id_musica = d.id_musica " +
+                     "WHERE d.id_usuario = ?";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idUsuario);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    int id = rs.getInt("id_musica");
+                    String nome = rs.getString("nome_musica");
+                    String autor = rs.getString("autor_musica");
+                    String genero = rs.getString("genero_musica");
+                    musicasDescurtidas.add(new Musica(id, nome, autor, genero));
+                }
+            }
+        }
+        return musicasDescurtidas;
+    }
 }
