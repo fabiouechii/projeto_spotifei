@@ -45,9 +45,9 @@
                   <Component id="lbl_spotifeiPlaylist" alignment="0" min="-2" pref="59" max="-2" attributes="0"/>
                   <Component id="bt_voltarPlaylist" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="tab_painelPlaylist" min="-2" pref="384" max="-2" attributes="0"/>
-              <EmptySpace pref="27" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="tab_painelPlaylist" min="-2" pref="424" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -119,7 +119,7 @@
                           <Component id="lbl_nomePlaylist" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="bt_criarPlaylist" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="217" max="32767" attributes="0"/>
+                      <EmptySpace pref="206" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -145,6 +145,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Confirmar!"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_criarPlaylistActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -214,6 +217,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Apagar!"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_apagarPlaylistActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -316,6 +322,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Confirmar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_confirmarnomePlaylistActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
@@ -355,6 +364,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Remover M&#xfa;sica!"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_removermusicaPlaylistActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

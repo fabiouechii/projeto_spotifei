@@ -3,11 +3,14 @@ C:\Users\fabio\Documents\GitHub\projeto_spotifei\src\main\java\controller\Contro
 C:\Users\fabio\Documents\GitHub\projeto_spotifei\src\main\java\controller\ControllerHistorico.java
 C:\Users\fabio\Documents\GitHub\projeto_spotifei\src\main\java\controller\ControllerLogin.java
 C:\Users\fabio\Documents\GitHub\projeto_spotifei\src\main\java\controller\ControllerPesquisa.java
+C:\Users\fabio\Documents\GitHub\projeto_spotifei\src\main\java\controller\ControllerPlaylist.java
 C:\Users\fabio\Documents\GitHub\projeto_spotifei\src\main\java\DAO\Conexao.java
 C:\Users\fabio\Documents\GitHub\projeto_spotifei\src\main\java\DAO\HistoricoBuscaDAO.java
 C:\Users\fabio\Documents\GitHub\projeto_spotifei\src\main\java\DAO\MusicaDAO.java
+C:\Users\fabio\Documents\GitHub\projeto_spotifei\src\main\java\DAO\PlaylistDAO.java
 C:\Users\fabio\Documents\GitHub\projeto_spotifei\src\main\java\DAO\UsuarioDAO.java
 C:\Users\fabio\Documents\GitHub\projeto_spotifei\src\main\java\model\Musica.java
+C:\Users\fabio\Documents\GitHub\projeto_spotifei\src\main\java\model\Playlist.java
 C:\Users\fabio\Documents\GitHub\projeto_spotifei\src\main\java\model\Usuario.java
 C:\Users\fabio\Documents\GitHub\projeto_spotifei\src\main\java\view\CadastroFrame.java
 C:\Users\fabio\Documents\GitHub\projeto_spotifei\src\main\java\view\HistoricoFrame.java

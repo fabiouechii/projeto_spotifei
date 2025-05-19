@@ -4,19 +4,103 @@
  */
 package view;
 
+
+import controller.ControllerPlaylist;
+import model.Playlist;
+import model.Musica;
+import model.Usuario;
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+import javax.swing.SwingUtilities;
+import view.LoginFrame;
+import view.MenuFrame;
+
 /**
  *
  * @author fabio
  */
 public class PlaylistFrame extends javax.swing.JFrame {
+    
+    private ControllerPlaylist controller;
+    private Usuario usuarioLogado;
+    
+    public PlaylistFrame(Usuario usuario) {
+        initComponents();
+        this.usuarioLogado = usuario;
+        this.controller = new ControllerPlaylist(this, this.usuarioLogado);
 
+        carregarDadosIniciais();
+    }
+    
+    private void configurarListeners() {
+        tab_painelPlaylist.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                carregarDadosDaAbaSelecionada();
+            }
+        });
+
+        bt_apagarPlaylist.setEnabled(false);  
+        bt_confirmarnomePlaylist.setEnabled(false);
+        txt_novonomePlaylist.setEnabled(false); 
+        bt_removermusicaPlaylist.setEnabled(false);
+        
+        table_apagarPlaylist.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    bt_apagarPlaylist.setEnabled(table_apagarPlaylist.getSelectedRow() != -1);
+                }
+            }
+        });
+        
+        table_renamePlaylist.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    boolean playlistSelecionada = table_renamePlaylist.getSelectedRow() != -1;
+
+                    txt_novonomePlaylist.setEnabled(playlistSelecionada);
+                    bt_confirmarnomePlaylist.setEnabled(playlistSelecionada);
+
+                    if (playlistSelecionada) {
+                        controller.carregarMusicasDaPlaylistSelecionadaParaEdicao();
+                        Playlist p = getPlaylistSelecionadaParaEditar();
+                        if (p != null) {
+                            txt_novonomePlaylist.setText(p.getNomePlaylist());
+                        }
+                    } else {
+                        txt_novonomePlaylist.setText("");
+                        exibirMusicasDaPlaylistNaAbaEditar(null);
+                    }
+                    bt_removermusicaPlaylist.setEnabled(false);
+                }
+            }
+        });
+    
+        table_musicasPlaylist.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    boolean playlistMasterSelecionada = table_renamePlaylist.getSelectedRow() != -1;
+                    boolean musicaDetalheSelecionada = table_musicasPlaylist.getSelectedRow() != -1;
+                    bt_removermusicaPlaylist.setEnabled(playlistMasterSelecionada && musicaDetalheSelecionada);
+                }
+            }
+        });
+    }
+        
+        
     /**
      * Creates new form PlaylistFrame
      */
-    public PlaylistFrame() {
-        initComponents();
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,6 +155,11 @@ public class PlaylistFrame extends javax.swing.JFrame {
         bt_criarPlaylist.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         bt_criarPlaylist.setForeground(new java.awt.Color(30, 215, 96));
         bt_criarPlaylist.setText("Confirmar!");
+        bt_criarPlaylist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_criarPlaylistActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpanel_criarPlaylistLayout = new javax.swing.GroupLayout(jpanel_criarPlaylist);
         jpanel_criarPlaylist.setLayout(jpanel_criarPlaylistLayout);
@@ -93,7 +182,7 @@ public class PlaylistFrame extends javax.swing.JFrame {
                     .addComponent(txt_nomePlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_nomePlaylist)
                     .addComponent(bt_criarPlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(217, Short.MAX_VALUE))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
 
         tab_painelPlaylist.addTab("Criar Playlist", jpanel_criarPlaylist);
@@ -114,6 +203,11 @@ public class PlaylistFrame extends javax.swing.JFrame {
         bt_apagarPlaylist.setBackground(new java.awt.Color(215, 30, 96));
         bt_apagarPlaylist.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         bt_apagarPlaylist.setText("Apagar!");
+        bt_apagarPlaylist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_apagarPlaylistActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpanel_apagarPlaylistLayout = new javax.swing.GroupLayout(jpanel_apagarPlaylist);
         jpanel_apagarPlaylist.setLayout(jpanel_apagarPlaylistLayout);
@@ -154,6 +248,11 @@ public class PlaylistFrame extends javax.swing.JFrame {
         bt_confirmarnomePlaylist.setBackground(new java.awt.Color(25, 20, 20));
         bt_confirmarnomePlaylist.setForeground(new java.awt.Color(30, 215, 96));
         bt_confirmarnomePlaylist.setText("Confirmar");
+        bt_confirmarnomePlaylist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_confirmarnomePlaylistActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Novo nome playlist:");
 
@@ -173,6 +272,11 @@ public class PlaylistFrame extends javax.swing.JFrame {
         bt_removermusicaPlaylist.setBackground(new java.awt.Color(215, 30, 96));
         bt_removermusicaPlaylist.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         bt_removermusicaPlaylist.setText("Remover Música!");
+        bt_removermusicaPlaylist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_removermusicaPlaylistActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpanel_editarPlaylistLayout = new javax.swing.GroupLayout(jpanel_editarPlaylist);
         jpanel_editarPlaylist.setLayout(jpanel_editarPlaylistLayout);
@@ -244,59 +348,220 @@ public class PlaylistFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_spotifeiPlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bt_voltarPlaylist))
-                .addGap(18, 18, 18)
-                .addComponent(tab_painelPlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tab_painelPlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void bt_voltarPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_voltarPlaylistActionPerformed
-//        if (this.usuarioLogado != null) {
-//            MenuFrame mf = new MenuFrame(this.usuarioLogado);
-//            mf.setVisible(true);
-//        } else {
-//            LoginFrame lf = new LoginFrame();
-//            lf.setVisible(true);
-//        }
-//        this.dispose();
+        if (this.usuarioLogado != null) {
+            MenuFrame mf = new MenuFrame(this.usuarioLogado);
+            mf.setVisible(true);
+        } else {
+            LoginFrame lf = new LoginFrame();
+            lf.setVisible(true);
+        }
+        this.dispose();
     }//GEN-LAST:event_bt_voltarPlaylistActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PlaylistFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PlaylistFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PlaylistFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PlaylistFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void bt_apagarPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_apagarPlaylistActionPerformed
+        if (controller != null) {
+            controller.acaoApagarPlaylistSelecionada();
         }
-        //</editor-fold>
+    }//GEN-LAST:event_bt_apagarPlaylistActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+    private void bt_confirmarnomePlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_confirmarnomePlaylistActionPerformed
+        if (controller != null) {
+            controller.acaoRenomearPlaylistSelecionada();
+        }
+    }//GEN-LAST:event_bt_confirmarnomePlaylistActionPerformed
+
+    private void bt_removermusicaPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_removermusicaPlaylistActionPerformed
+        if (controller != null) {
+            controller.acaoRemoverMusicaSelecionadaDaPlaylist();
+        }
+    }//GEN-LAST:event_bt_removermusicaPlaylistActionPerformed
+
+    private void bt_criarPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_criarPlaylistActionPerformed
+        if (controller != null) {
+            controller.acaoCriarNovaPlaylist();
+        }
+    }//GEN-LAST:event_bt_criarPlaylistActionPerformed
+
+    
+    private void carregarDadosIniciais() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                new PlaylistFrame().setVisible(true);
+                carregarDadosDaAbaSelecionada();
             }
         });
     }
+    
+    private void carregarDadosDaAbaSelecionada() {
+        int selectedIndex = tab_painelPlaylist.getSelectedIndex();
+        //System.out.println("Aba: " + selectedIndex);
+
+        if (selectedIndex == 0) { //0-> criar playlist//1-> apagar playlis//2-> editar
+            txt_nomePlaylist.setText("");
+            
+        } else if (selectedIndex == 1) {
+            controller.carregarPlaylistsParaAbaApagar();
+        } else if (selectedIndex == 2) {
+            controller.carregarPlaylistsParaAbaEditar();
+            exibirMusicasDaPlaylistNaAbaEditar(null);
+            txt_novonomePlaylist.setText("");
+            txt_novonomePlaylist.setEnabled(false);
+            bt_confirmarnomePlaylist.setEnabled(false);
+            bt_removermusicaPlaylist.setEnabled(false);
+        }
+    }
+    
+    public JTextField getTxt_nomePlaylist() {
+        return txt_nomePlaylist;
+    }
+
+    public Playlist getPlaylistSelecionadaParaApagar() {
+        int linhaSelecionada = table_apagarPlaylist.getSelectedRow();
+        if (linhaSelecionada != -1) {
+            try {
+                int idPlaylist = (Integer) table_apagarPlaylist.getValueAt(linhaSelecionada, 0);
+                String nomePlaylist = (String) table_apagarPlaylist.getValueAt(linhaSelecionada, 1);
+                return new Playlist(idPlaylist, nomePlaylist, usuarioLogado.getIdUsuario());
+            } catch (ClassCastException e) {
+                System.err.println("Erro ao converter valor da tabela para Apagar: " + e.getMessage());
+                return null;
+            }
+        }
+        return null;
+    }
+    
+    public Playlist getPlaylistSelecionadaParaEditar() {
+        int linhaSelecionada = table_renamePlaylist.getSelectedRow();
+        if (linhaSelecionada != -1) {
+            try {
+                int idPlaylist = (Integer) table_renamePlaylist.getValueAt(linhaSelecionada, 0);
+                String nomePlaylist = (String) table_renamePlaylist.getValueAt(linhaSelecionada, 1);
+                return new Playlist(idPlaylist, nomePlaylist, usuarioLogado.getIdUsuario());
+            } catch (ClassCastException e) {
+                System.err.println("Erro ao converter valor da tabela para Editar: " + e.getMessage());
+                return null;
+            }
+        }
+        return null;
+    }
+    
+    public JTextField getTxt_novonomePlaylist() {
+        return txt_novonomePlaylist;
+    }
+
+    public Musica getMusicaSelecionadaParaRemover() {
+        int linhaSelecionadaNaTabelaMusicas = table_musicasPlaylist.getSelectedRow();
+        if (linhaSelecionadaNaTabelaMusicas != -1) {
+            try {
+                int idMusica = (Integer) table_musicasPlaylist.getValueAt(linhaSelecionadaNaTabelaMusicas, 0);
+                String nomeMusica = (String) table_musicasPlaylist.getValueAt(linhaSelecionadaNaTabelaMusicas, 1);
+                String autor = (String) table_musicasPlaylist.getValueAt(linhaSelecionadaNaTabelaMusicas, 2);
+                String genero = (String) table_musicasPlaylist.getValueAt(linhaSelecionadaNaTabelaMusicas, 3);
+                return new Musica(idMusica, nomeMusica, autor, genero);
+            } catch (ClassCastException e) {
+                System.err.println("Erro ao converter valor da tabela de músicas: " + e.getMessage());
+                return null;
+            }
+        }
+        return null;
+    }
+    
+    public void exibirPlaylistsNaTabelaApagar(List<Playlist> playlists) {
+        popularTabelaPlaylists(table_apagarPlaylist, playlists);
+    }
+
+    public void exibirPlaylistsNaTabelaEditar(List<Playlist> playlists) {
+        popularTabelaPlaylists(table_renamePlaylist, playlists);
+    }
+    
+    private void popularTabelaPlaylists(JTable tabela, List<Playlist> playlists) {
+        String[] colunas = {"ID Playlist", "Nome da Playlist"};
+        DefaultTableModel model = new DefaultTableModel(colunas, 0) {
+            @Override public boolean isCellEditable(int row, int column) { return false; }
+        };
+        if (playlists != null) {
+            for (Playlist p : playlists) {
+                model.addRow(new Object[]{p.getIdPlaylist(), p.getNomePlaylist()});
+            }
+        }
+        tabela.setModel(model);
+
+        if (tabela.getColumnCount() > 0) {
+            javax.swing.table.TableColumn columnID = tabela.getColumnModel().getColumn(0);
+            columnID.setMinWidth(0);
+            columnID.setMaxWidth(0);
+            columnID.setPreferredWidth(0);
+            columnID.setResizable(false);
+        }
+    }
+    
+    public void exibirMusicasDaPlaylistNaAbaEditar(List<Musica> musicas) {
+        String[] colunas = {"ID Música", "Nome", "Autor", "Gênero"};
+        DefaultTableModel model = new DefaultTableModel(colunas, 0) {
+            @Override public boolean isCellEditable(int row, int column) { return false; }
+        };
+        if (musicas != null) {
+            for (Musica m : musicas) {
+                model.addRow(new Object[]{m.getIdMusica(), m.getNomeMusica(), m.getAutorMusica(), m.getGeneroMusica()});
+            }
+        }
+        table_musicasPlaylist.setModel(model);
+        if (table_musicasPlaylist.getColumnCount() > 0 && table_musicasPlaylist.getColumnModel().getColumn(0).getHeaderValue().equals("ID Música")) {
+            table_musicasPlaylist.removeColumn(table_musicasPlaylist.getColumnModel().getColumn(0));
+        }
+    }
+    
+    public void limparCampoNovaPlaylist() {
+        txt_nomePlaylist.setText("");
+    }
+
+
+    
+    
+    /**
+     * @param args the command line arguments
+     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(PlaylistFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(PlaylistFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(PlaylistFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(PlaylistFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new PlaylistFrame().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_apagarPlaylist;

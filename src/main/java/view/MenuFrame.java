@@ -150,7 +150,16 @@ public class MenuFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_voltarMenuActionPerformed
 
     private void bt_playlistsMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_playlistsMenuActionPerformed
-        // TODO add your handling code here:
+        if (this.usuarioLogado != null) {
+        PlaylistFrame playlistView = new PlaylistFrame(this.usuarioLogado);
+        playlistView.setVisible(true);
+        this.dispose();
+    } else {
+        JOptionPane.showMessageDialog(this, "Erro: Usuário não está logado.", "Erro", JOptionPane.ERROR_MESSAGE);
+        LoginFrame loginView = new LoginFrame();
+        loginView.setVisible(true);
+        this.dispose();
+    }
     }//GEN-LAST:event_bt_playlistsMenuActionPerformed
 
     private void bt_historicoMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_historicoMenuActionPerformed
